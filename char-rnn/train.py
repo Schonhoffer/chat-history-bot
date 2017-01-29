@@ -82,7 +82,7 @@ def train(args):
     model = Model(args)
 
     with tf.Session() as sess:
-        sess.run(tf.global_variables_initializer())
+        sess.run(tf.initialize_all_variables())
         saver = tf.train.Saver(tf.global_variables())
         # restore model
         if args.init_from is not None:
