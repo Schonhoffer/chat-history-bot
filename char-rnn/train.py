@@ -53,6 +53,7 @@ def train(args):
     
     # check compatibility if training is continued from previously saved model
     if args.init_from is not None:
+        print "Trying to load checkpoint from directory", args.init_from
         # check if all necessary files exist 
         assert os.path.isdir(args.init_from)," %s must be a a path" % args.init_from
         assert os.path.isfile(os.path.join(args.init_from,"config.pkl")),"config.pkl file does not exist in path %s"%args.init_from
@@ -87,6 +88,7 @@ def train(args):
         # restore model
         if args.init_from is not None:
             saver.restore(sess, ckpt.model_checkpoint_path)
+            print "Restored model from checkpoint!"
         for e in range(args.num_epochs):
             sess.run(tf.assign(model.lr, args.learning_rate * (args.decay_rate ** e)))
             data_loader.reset_batch_pointer()
