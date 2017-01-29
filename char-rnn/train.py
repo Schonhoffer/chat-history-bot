@@ -83,7 +83,7 @@ def train(args):
 
     with tf.Session() as sess:
         sess.run(tf.initialize_all_variables())
-        saver = tf.train.Saver(tf.global_variables())
+        saver = tf.train.Saver() # used to pass tf.global_variables() to saver
         # restore model
         if args.init_from is not None:
             saver.restore(sess, ckpt.model_checkpoint_path)
